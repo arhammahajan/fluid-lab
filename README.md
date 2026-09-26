@@ -41,8 +41,8 @@ Python **3.12** or newer. No third-party runtime dependencies.
 ### Run it from a checkout (no install needed)
 
 ```console
-$ git clone <this-repo>
-$ cd fluid_mechanics_experiments
+$ git clone https://github.com/arhammahajan/fluid-lab.git
+$ cd fluid-lab
 $ python -m fluid_lab --list
 Available experiments:
   centrifugal-pump    Pump discharge, head, brake/indicated power and efficiency
