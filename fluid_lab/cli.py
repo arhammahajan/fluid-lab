@@ -135,10 +135,11 @@ EXPERIMENTS: Final[dict[str, Experiment[Any, Any]]] = {
                 "vacuum gauge on the suction side",
             ),
             FieldSpec(
-                "time_for_10_pulses_s",
+                "time_for_pulses_s",
                 "--t-pulses",
-                "Time required for 10 pulses [s]",
-                "time for 10 energy-meter disc pulses",
+                f"Time required for {centrifugal_pump.PULSES_PER_OBSERVATION:g} "
+                "energy-meter pulses [s]",
+                f"time for {centrifugal_pump.PULSES_PER_OBSERVATION:g} energy-meter disc pulses",
             ),
         ),
         evaluate=centrifugal_pump.evaluate,

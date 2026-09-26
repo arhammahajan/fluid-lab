@@ -37,7 +37,7 @@ PUMP_COLUMNS = (
     "time_for_100mm_rise_s",
     "discharge_pressure_kgf_cm2",
     "suction_vacuum_mm_hg",
-    "time_for_10_pulses_s",
+    "time_for_pulses_s",
 )
 
 

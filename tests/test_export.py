@@ -91,14 +91,14 @@ PUMP_COLUMNS = (
     "time_for_100mm_rise_s",
     "discharge_pressure_kgf_cm2",
     "suction_vacuum_mm_hg",
-    "time_for_10_pulses_s",
+    "time_for_pulses_s",
 )
 
 
 def test_a_pump_series_evaluates_end_to_end() -> None:
     """A two-run series produces two results, which a characteristic curve needs."""
     source = io.StringIO(
-        "time_for_100mm_rise_s,discharge_pressure_kgf_cm2,suction_vacuum_mm_hg,time_for_10_pulses_s\n"
+        "time_for_100mm_rise_s,discharge_pressure_kgf_cm2,suction_vacuum_mm_hg,time_for_pulses_s\n"
         "12.5,0.5,120,20\n"
         "10.0,0.4,100,22\n"
     )

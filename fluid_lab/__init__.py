@@ -25,7 +25,7 @@ Example:
     ...     time_for_100mm_rise_s=12.5,
     ...     discharge_pressure_kgf_cm2=0.5,
     ...     suction_vacuum_mm_hg=120.0,
-    ...     time_for_10_pulses_s=20.0,
+    ...     time_for_pulses_s=20.0,
     ... )
     >>> performance = evaluate_centrifugal_pump(readings)
     >>> round(performance.total_head_m, 3)

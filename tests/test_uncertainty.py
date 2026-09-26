@@ -123,7 +123,7 @@ def test_pump_discharge_uncertainty_matches_volume_over_time() -> None:
 
 def test_pump_input_power_uncertainty_matches_the_energy_meter_relation() -> None:
     readings = CentrifugalPumpReadings(12.5, 0.5, 120.0, 20.0)
-    budget = propagate(evaluate, readings, {"time_for_10_pulses_s": 0.2})
+    budget = propagate(evaluate, readings, {"time_for_pulses_s": 0.2})
     factor = 3600.0 / 1600.0 * 5.0
     assert budget.standard_uncertainty["indicated_power_kw"] == pytest.approx(
         factor * 0.2 / 20.0**2, rel=1e-6

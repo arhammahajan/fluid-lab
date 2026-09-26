@@ -79,7 +79,7 @@ DEFAULT_UNCERTAINTIES: Final[dict[str, float]] = {
     "time_for_100mm_rise_s": 0.2,  # hand stopwatch: reaction time + scale reading
     "discharge_pressure_kgf_cm2": 0.05,  # 0.1 kgf/cm^2 least count, half a division
     "suction_vacuum_mm_hg": 1.0,  # 2 mm mercury scale, half a division
-    "time_for_10_pulses_s": 0.2,  # hand stopwatch
+    "time_for_pulses_s": 0.2,  # hand stopwatch
 }
 """Assumed absolute standard uncertainties [same unit as the reading].
 
@@ -102,14 +102,14 @@ class CentrifugalPumpReadings:
         time_for_100mm_rise_s: Time for a 100 mm rise in the measuring tank [s].
         discharge_pressure_kgf_cm2: Discharge pressure-gauge reading [kgf/cm^2].
         suction_vacuum_mm_hg: Suction vacuum-gauge reading [mm Hg].
-        time_for_10_pulses_s: Time for the energy-meter disc to complete
+        time_for_pulses_s: Time for the energy-meter disc to complete
             :data:`PULSES_PER_OBSERVATION` pulses [s].
     """
 
     time_for_100mm_rise_s: float
     discharge_pressure_kgf_cm2: float
     suction_vacuum_mm_hg: float
-    time_for_10_pulses_s: float
+    time_for_pulses_s: float
 
 
 @dataclass(frozen=True, slots=True)
@@ -236,7 +236,7 @@ def indicated_power(time_for_pulses_s: float) -> float:
     Raises:
         ValueError: If ``time_for_pulses_s`` is not positive.
     """
-    require_positive("time for 10 energy-meter pulses", time_for_pulses_s)
+    require_positive(f"time for {PULSES_PER_OBSERVATION:g} energy-meter pulses", time_for_pulses_s)
     energy_meter_factor = SECONDS_PER_HOUR / ENERGY_METER_CONSTANT_REV_PER_KWH
     return energy_meter_factor * (PULSES_PER_OBSERVATION / time_for_pulses_s)
 
@@ -256,7 +256,7 @@ def evaluate(readings: CentrifugalPumpReadings) -> CentrifugalPumpPerformance:
     discharge = actual_discharge(readings.time_for_100mm_rise_s)
     head = total_head(readings.discharge_pressure_kgf_cm2, readings.suction_vacuum_mm_hg)
     output_power = brake_power(discharge, head)
-    input_power = indicated_power(readings.time_for_10_pulses_s)
+    input_power = indicated_power(readings.time_for_pulses_s)
     return CentrifugalPumpPerformance(
         actual_discharge_m3_s=discharge,
         total_head_m=head,
